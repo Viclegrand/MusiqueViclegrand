@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site de Musique</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        audio {
+            width: 100%;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Site de Musique</h1>
+    </header>
+
+    <main>
+        <h2>Rechercher une chanson :</h2>
+        <input type="text" id="searchInput" placeholder="Entrez votre recherche...">
+        
+        <h2>Résultats :</h2>
+        <ul id="songList">
+            <li><a href="C:\Users\VICTO\Desktop\musique pour le site\Diamondz-n-Roses-_Original-Ver._.mp3">Diamondz-n-Roses</a></li>
+            <li><a href="C:\Users\VICTO\Desktop\musique pour le site\Fluxxwave.mp3">Fluxxwave</a></li>
+            <li><a href="C:\Users\VICTO\Desktop\musique pour le site\Josh-A-no-chill-slowed-to-perfection.mp3">No-Chill-slowed</a></li>
+            <!-- Ajoutez autant de chansons que nécessaire -->
+        </ul>
+
+        <h2>Chanson en cours :</h2>
+        <audio controls id="audioPlayer">
+            <source src="" type="audio/mp3">
+            Votre navigateur ne prend pas en charge la balise audio.
+        </audio>
+    </main>
+
+    <script>
+        const audioLinks = document.querySelectorAll('#songList a');
+        const audioPlayer = document.getElementById('audioPlayer');
+        const searchInput = document.getElementById('searchInput');
+
+        audioLinks.forEach(link => {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+                const audioSource = this.getAttribute('href');
+                audioPlayer.src = audioSource;
+                audioPlayer.load();
+                audioPlayer.play();
+            });
+        });
+
+        searchInput.addEventListener('input', function () {
+            const searchTerm = searchInput.value.toLowerCase();
+            audioLinks.forEach(link => {
+                const songName = link.innerText.toLowerCase();
+                if (songName.includes(searchTerm)) {
+                    link.style.display = 'block';
+                } else {
+                    link.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
